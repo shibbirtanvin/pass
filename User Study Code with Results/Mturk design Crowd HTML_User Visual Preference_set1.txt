@@ -1,0 +1,89 @@
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<crowd-form answer-format="flatten-objects">
+
+    <!-- The crowd-classifier element will create a tool for the Worker to select the
+           correct answer to your question -->
+        
+    <crowd-classifier 
+      name="equal"
+      categories="['(A:ASAP)', '(B:M4)', '(C:Random)', '(D:PASS)', '(E:PAA)']"
+      header="Which one of the following is more similar to the given one? (Please consider the Red marked circles(Anomaly) in the given image for finding the almost similar image)"
+     >     
+        <classification-target>
+        <div>
+            <h3>Given Image</h3>
+            <img width="100%" src="${original_image_url}" />
+           <hr/>
+                <h3>(A:ASAP)</h3>
+	      	<p>
+                   
+	      	    <img width="100%" src="${asap_image_url}" />
+	      	</p>
+	    </div>
+	    <hr/>
+        <div>
+                <h3>(B:M4)</h3>
+	    
+	      	<p>
+                  
+	      	    <img width="100%" src="${m4_image_url}" />
+	      	</p>
+	    </div>
+	    <hr/>
+	     <div>
+                <h3>(C:Random)</h3>
+	      	<p>
+                   
+	      	    <img width="100%" src="${random_image_url}" />
+	      	</p>
+	    </div>
+	    <hr/>
+	     <div>
+                <h3>(D:PASS)</h3>
+	      	<p>
+                   
+	      	    <img width="100%" src="${window_image_url}" />
+	      	</p>
+	    </div>
+	     <hr/>
+	     
+	     	     <div>
+                <h3>(E:PAA)</h3>
+	      	<p>
+                   
+	      	    <img width="100%" src="${paa_image_url}" />
+	      	</p>
+	    </div>
+	     <hr/>
+	     
+      </classification-target>
+
+       <!-- Use the short-instructions section for quick instructions that the Worker
+              will see while working on the task. Including some basic examples of 
+              good and bad answers here can help get good results. You can include 
+              any HTML here. -->
+        <short-instructions>
+        Please consider the <b>Red marked circles</b> in the given image for finding almost similar image.
+      </short-instructions>
+
+      <!-- Use the full-instructions section for more detailed instructions that the 
+            Worker can open while working on the task. Including more detailed 
+            instructions and additional examples of good and bad answers here can
+            help get good results. You can include any HTML here. -->
+      <full-instructions>
+        <p>Read the task carefully and inspect the items.</p>
+        <p>Select which image is more similar to the given image.</p>
+        <p>Consider the Red marked circles for similarity checking</p>
+      </full-instructions>
+
+    </crowd-classifier>
+</crowd-form>
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+  
